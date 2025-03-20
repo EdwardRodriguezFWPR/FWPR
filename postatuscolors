@@ -1,0 +1,29 @@
+/**
+ * @NApiVersion 2.x
+ * @NScriptType ClientScript
+ */
+define([], function() {
+    function pageInit(context) {
+        setTimeout(function() {
+            var approvalStatus = document.querySelector("[data-fieldid='approvalstatus'], #approvalstatus_fs_lbl");
+
+            if (approvalStatus) {
+                var statusText = approvalStatus.innerText || approvalStatus.textContent;
+                var colorMap = {
+                    'Pending Approval': 'orange',
+                    'Approved': 'green',
+                    'Rejected': 'red'
+                };
+
+                if (colorMap[statusText]) {
+                    approvalStatus.style.color = colorMap[statusText];
+                    approvalStatus.style.fontWeight = 'bold';
+                }
+            }
+        }, 1000); // Ensure UI is fully rendered before applying color
+    }
+
+    return {
+        pageInit: pageInit
+    };
+});
